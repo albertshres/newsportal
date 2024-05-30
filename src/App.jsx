@@ -2,12 +2,14 @@ import NavBar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import FetchData from "./components/FetchData";
+import Categories from "./pages/Categories";
 
 function App() {
   return (
     <>
       <Router>
         <NavBar />
+        <Categories />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/general" element={<FetchData cat="general" />}></Route>
