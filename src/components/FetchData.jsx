@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const FetchData = ({ cat }) => {
   const [Data, setData] = useState([]);
   const fetchdata = () => {
-    fetch(
-      cat
-        ? `https://newsapi.org/v2/top-headlines?country=in&category=${cat}&apiKey=c043e24d9a074fef80574fae2d5d1337`
-        : `https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=c043e24d9a074fef80574fae2d5d1337`
-    )
-      .then((res) => res.json())
-      .then((data) => setData(data.articles));
+    //   fetch(
+    //     cat
+    //       ? `https://newsapi.org/v2/top-headlines?country=in&category=${cat}&apiKey=c043e24d9a074fef80574fae2d5d1337`
+    //       : `https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=c043e24d9a074fef80574fae2d5d1337`
+    //   )
+    //     .then((res) => res.json())
+    //     .then((data) => setData(data.articles));
+
+    const url = cat
+      ? `https://newsapi.org/v2/top-headlines?country=in&category=${cat}&apiKey=c043e24d9a074fef80574fae2d5d1337`
+      : `https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=c043e24d9a074fef80574fae2d5d1337`;
+
+    axios
+      .get(url)
+      .then((response) => {
+        setData(response.data.articles);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   };
+
   useEffect(() => {
     fetchdata();
   }, [cat]);
