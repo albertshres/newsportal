@@ -39,21 +39,31 @@ const FetchData = ({ cat }) => {
         {Data
           ? Data.map((items, index) => (
               <>
-                <div className="col-lg-5 mb-4" key={index}>
-                  <div className="card w-100" style={{ width: "60vw" }}>
-                    <img src={items.urlToImage} class="card-img-top" alt="" />
-                    <div className="card-body">
-                      <h5 className="card-title" key={index}>
-                        {items.title}
-                      </h5>
-                      <p key={index} class="card-text">
-                        {items.description}
-                      </p>
-                      <Link to={items.url} className="btn btn-primary">
+                <div className="col-lg-4 col-md-6 mb-4" key={index}>
+                  <Link to={items.url} className="text-decoration-none">
+                    <div className="card h-100" style={{ width: "18rem" }}>
+                      {/* <img src={items.urlToImage} class="card-img-top" alt="" /> */}
+                      <img
+                        src={
+                          items.urlToImage || "https://via.placeholder.com/150"
+                        }
+                        className="card-img-top"
+                        alt={items.title || "Image not available"}
+                        style={{ height: "200px", objectFit: "cover" }}
+                      />
+                      <div className="card-body d-flex flex-column">
+                        <h5 className="card-title" key={index}>
+                          {items.title}
+                        </h5>
+                        <p key={index} class="card-text">
+                          {items.description}
+                        </p>
+                        {/* <Link to={items.url} className="btn btn-primary">
                         Read More
-                      </Link>
+                      </Link> */}
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               </>
             ))
